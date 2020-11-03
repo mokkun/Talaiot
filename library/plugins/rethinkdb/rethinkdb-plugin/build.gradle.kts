@@ -7,7 +7,7 @@ talaiotPlugin {
     artifact = "rethinkdb"
     group = "com.cdsap.talaiot.plugin"
     mainClass = "com.cdsap.talaiot.plugin.rethinkdb.TalaiotRethinkdbPlugin"
-    version = "1.3.6-SNAPSHOT"
+    version = "1.4.0-SNAPSHOT"
 }
 
 dependencies {

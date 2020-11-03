@@ -8,7 +8,7 @@ talaiotPlugin {
     artifact = "talaiot"
     group = "com.cdsap"
     mainClass = "com.cdsap.talaiot.plugin.TalaiotPlugin"
-    version = "1.3.6-SNAPSHOT"
+    version = "1.4.0-SNAPSHOT"
 }
 
 dependencies {
