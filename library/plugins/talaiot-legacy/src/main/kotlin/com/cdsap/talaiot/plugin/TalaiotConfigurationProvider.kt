@@ -1,16 +1,16 @@
 package com.cdsap.talaiot.plugin
 
-
+import com.cdsap.talaiot.extensions.getTalaiotExtension
 import com.cdsap.talaiot.logger.LogTrackerImpl
 import com.cdsap.talaiot.provider.PublisherConfigurationProvider
-import com.cdsap.talaiot.publisher.*
 import com.cdsap.talaiot.publisher.JsonPublisher
 import com.cdsap.talaiot.publisher.OutputPublisher
+import com.cdsap.talaiot.publisher.Publisher
 import com.cdsap.talaiot.publisher.elasticsearch.ElasticSearchPublisher
-import com.cdsap.talaiot.publisher.hybrid.HybridPublisher
-import com.cdsap.talaiot.publisher.influxdb.InfluxDbPublisher
 import com.cdsap.talaiot.publisher.graph.GraphPublisherFactoryImpl
 import com.cdsap.talaiot.publisher.graph.TaskDependencyGraphPublisher
+import com.cdsap.talaiot.publisher.hybrid.HybridPublisher
+import com.cdsap.talaiot.publisher.influxdb.InfluxDbPublisher
 import com.cdsap.talaiot.publisher.pushgateway.PushGatewayFormatter
 import com.cdsap.talaiot.publisher.pushgateway.PushGatewayPublisher
 import com.cdsap.talaiot.publisher.rethinkdb.RethinkDbPublisher
@@ -24,7 +24,7 @@ class TalaiotConfigurationProvider(
 ) : PublisherConfigurationProvider {
     override fun get(): List<Publisher> {
         val publishers = mutableListOf<Publisher>()
-        val talaiotExtension = project.extensions.getByName("talaiot") as TalaiotPluginExtension
+        val talaiotExtension = project.getTalaiotExtension<TalaiotPluginExtension>()
         val logger = LogTrackerImpl(talaiotExtension.logger)
         val executor = Executors.newSingleThreadExecutor()
         val heavyExecutor = Executors.newSingleThreadExecutor()

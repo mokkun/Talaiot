@@ -1,5 +1,6 @@
 package com.cdsap.talaiot.plugin.graph
 
+import com.cdsap.talaiot.extensions.getTalaiotExtension
 import com.cdsap.talaiot.logger.LogTrackerImpl
 import com.cdsap.talaiot.provider.PublisherConfigurationProvider
 import com.cdsap.talaiot.publisher.Publisher
@@ -13,7 +14,7 @@ class GraphConfigurationProvider(
 ) : PublisherConfigurationProvider {
     override fun get(): List<Publisher> {
         val publishers = mutableListOf<Publisher>()
-        val talaiotExtension = project.extensions.getByName("talaiot") as GraphExtension
+        val talaiotExtension = project.getTalaiotExtension<GraphExtension>()
 
         talaiotExtension.publishers?.apply {
             publishers.add(

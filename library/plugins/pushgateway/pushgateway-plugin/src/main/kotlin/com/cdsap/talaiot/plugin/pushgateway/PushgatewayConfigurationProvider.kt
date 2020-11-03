@@ -1,5 +1,6 @@
 package com.cdsap.talaiot.plugin.pushgateway
 
+import com.cdsap.talaiot.extensions.getTalaiotExtension
 import com.cdsap.talaiot.logger.LogTrackerImpl
 import com.cdsap.talaiot.provider.PublisherConfigurationProvider
 import com.cdsap.talaiot.publisher.Publisher
@@ -14,7 +15,7 @@ class PushgatewayConfigurationProvider(
 ) : PublisherConfigurationProvider {
     override fun get(): List<Publisher> {
         val publishers = mutableListOf<Publisher>()
-        val talaiotExtension = project.extensions.getByName("talaiot") as PushgatewayExtension
+        val talaiotExtension = project.getTalaiotExtension<PushgatewayExtension>()
 
         talaiotExtension.publishers?.apply {
             val logger = LogTrackerImpl(talaiotExtension.logger)

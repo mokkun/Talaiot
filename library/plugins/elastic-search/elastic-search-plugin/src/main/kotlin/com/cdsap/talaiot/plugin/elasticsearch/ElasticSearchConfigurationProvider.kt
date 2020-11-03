@@ -1,5 +1,6 @@
 package com.cdsap.talaiot.plugin.elasticsearch
 
+import com.cdsap.talaiot.extensions.getTalaiotExtension
 import com.cdsap.talaiot.logger.LogTrackerImpl
 import com.cdsap.talaiot.provider.PublisherConfigurationProvider
 import com.cdsap.talaiot.publisher.Publisher
@@ -12,7 +13,7 @@ class ElasticSearchConfigurationProvider(
 ) : PublisherConfigurationProvider {
     override fun get(): List<Publisher> {
         val publishers = mutableListOf<Publisher>()
-        val talaiotExtension = project.extensions.getByName("talaiot") as ElasticSearchExtension
+        val talaiotExtension = project.getTalaiotExtension<ElasticSearchExtension>()
 
         talaiotExtension.publishers?.apply {
             publishers.add(
