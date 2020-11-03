@@ -10,7 +10,7 @@ import com.cdsap.talaiot.publisher.timeline.TimelinePublisher
 import org.gradle.api.Project
 
 class BaseConfigurationProvider(
-    val project: Project
+    private val project: Project
 ) : PublisherConfigurationProvider {
     override fun get(): List<Publisher> {
         val publishers = mutableListOf<Publisher>()

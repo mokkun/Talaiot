@@ -11,7 +11,7 @@ import org.gradle.api.Project
 import java.util.concurrent.Executors
 
 class PushgatewayConfigurationProvider(
-    val project: Project
+    private val project: Project
 ) : PublisherConfigurationProvider {
     override fun get(): List<Publisher> {
         val publishers = mutableListOf<Publisher>()
