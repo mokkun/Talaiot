@@ -8,7 +8,7 @@ open class BaseExtension(project: Project) : TalaiotExtension(project) {
     /**
      * General Publisher configuration included in the build
      */
-    var publishers: BaseConfiguration? = null
+    internal var publishers: BaseConfiguration? = null
 
     fun publishers(block: BaseConfiguration.() -> Unit) {
         publishers = BaseConfiguration(project).also(block)
