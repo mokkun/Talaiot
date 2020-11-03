@@ -1,3 +1,5 @@
+import com.cdsap.talaiot.logger.LogTracker
+
 repositories {
     jcenter()
     mavenCentral()
@@ -7,16 +9,29 @@ repositories {
 
 plugins {
     kotlin("jvm") version "1.3.60"
-    id("com.cdsap.talaiot.plugin.base") version "1.4.0-SNAPSHOT"
+    id("com.cdsap.talaiot.plugin.graph") version "1.4.0-SNAPSHOT"
 }
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.10")
 }
+// Base plugin config
+//talaiot {
+//    logger = LogTracker.Mode.INFO
+//    publishers {
+//        jsonPublisher = true
+//    }
+//}
 
+// Graph plugin config
 talaiot {
+    logger = LogTracker.Mode.INFO
     publishers {
-        jsonPublisher = true
+        taskDependencyGraphPublisher {
+            html = true
+            gexf = true
+            dot = true
+        }
     }
 }
 

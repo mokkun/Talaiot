@@ -5,8 +5,11 @@ pluginManagement {
     }
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id == "com.cdsap.talaiot.plugin.base") {
-                useModule("com.cdsap.talaiot.plugin:base:${requested.version}")
+            val namespace = requested.id.namespace
+            if (namespace == "com.cdsap.talaiot.plugin") {
+                val pluginName = requested.id.name
+                val pluginVersion = requested.version
+                useModule("$namespace:$pluginName:$pluginVersion")
             }
         }
     }
