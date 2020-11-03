@@ -16,13 +16,15 @@ class InfluxdbConfigurationProvider(
         val talaiotExtension = project.getTalaiotExtension<InfluxdbExtension>()
 
         talaiotExtension.publishers?.apply {
-            publishers.add(
-                InfluxDbPublisher(
-                    this.influxDbPublisher!!,
-                    LogTrackerImpl(talaiotExtension.logger),
-                    Executors.newSingleThreadExecutor()
+            influxDbPublisher?.let { publisherConfig ->
+                publishers.add(
+                    InfluxDbPublisher(
+                        publisherConfig,
+                        LogTrackerImpl(talaiotExtension.logger),
+                        Executors.newSingleThreadExecutor()
+                    )
                 )
-            )
+            }
             publishers.addAll(customPublishers)
         }
         return publishers

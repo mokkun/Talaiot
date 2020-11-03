@@ -18,17 +18,18 @@ class PushgatewayConfigurationProvider(
         val talaiotExtension = project.getTalaiotExtension<PushgatewayExtension>()
 
         talaiotExtension.publishers?.apply {
-            val logger = LogTrackerImpl(talaiotExtension.logger)
-            PushGatewayFormatter()
-            publishers.add(
-                PushGatewayPublisher(
-                    this.pushGatewayPublisher!!,
-                    LogTrackerImpl(talaiotExtension.logger),
-                    SimpleRequest(logger),
-                    Executors.newSingleThreadExecutor(),
-                    PushGatewayFormatter()
+            pushGatewayPublisher?.let { publisherConfig ->
+                val logger = LogTrackerImpl(talaiotExtension.logger)
+                publishers.add(
+                    PushGatewayPublisher(
+                        publisherConfig,
+                        logger,
+                        SimpleRequest(logger),
+                        Executors.newSingleThreadExecutor(),
+                        PushGatewayFormatter()
+                    )
                 )
-            )
+            }
             publishers.addAll(customPublishers)
         }
         return publishers

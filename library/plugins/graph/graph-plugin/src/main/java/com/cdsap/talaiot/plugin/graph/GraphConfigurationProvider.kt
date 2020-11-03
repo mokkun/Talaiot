@@ -17,14 +17,17 @@ class GraphConfigurationProvider(
         val talaiotExtension = project.getTalaiotExtension<GraphExtension>()
 
         talaiotExtension.publishers?.apply {
-            publishers.add(
-                TaskDependencyGraphPublisher(
-                    this.taskDependencyGraphPublisher!!,
-                    LogTrackerImpl(talaiotExtension.logger),
-                    Executors.newSingleThreadExecutor(),
-                    GraphPublisherFactoryImpl()
+            taskDependencyGraphPublisher?.let { publisherConfig ->
+                publishers.add(
+                    TaskDependencyGraphPublisher(
+                        publisherConfig,
+                        LogTrackerImpl(talaiotExtension.logger),
+                        Executors.newSingleThreadExecutor(),
+                        GraphPublisherFactoryImpl()
+                    )
                 )
-            )
+            }
+            publishers.addAll(customPublishers)
         }
         return publishers
     }

@@ -16,13 +16,15 @@ class RethinkdbConfigurationProvider(
         val talaiotExtension = project.getTalaiotExtension<RethinkdbExtension>()
 
         talaiotExtension.publishers?.apply {
-            publishers.add(
-                RethinkDbPublisher(
-                    this.rethinkDbPublisher!!,
-                    LogTrackerImpl(talaiotExtension.logger),
-                    Executors.newSingleThreadExecutor()
+            rethinkDbPublisher?.let { publisherConfig ->
+                publishers.add(
+                    RethinkDbPublisher(
+                        publisherConfig,
+                        LogTrackerImpl(talaiotExtension.logger),
+                        Executors.newSingleThreadExecutor()
+                    )
                 )
-            )
+            }
             publishers.addAll(customPublishers)
         }
         return publishers
